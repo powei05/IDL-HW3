@@ -303,7 +303,7 @@ class EncoderDecoderTransformer(nn.Module):
             x_dec, self_attn, cross_attn = self.dec_layers[i](
                 x_dec,  
                 encoder_output,
-                self_attn_mask=causal_mask,
+                attn_mask=causal_mask,
                 dec_key_padding_mask=pad_mask_tgt,
                 enc_key_padding_mask=pad_mask_src,
             )
