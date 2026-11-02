@@ -160,7 +160,7 @@ class ASRTrainer(BaseTrainer):
 
             # TODO: Backpropagate the loss
             self.scaler.scale(loss).backward()
-            self.scaler = NotImplementedError
+            #self.scaler = NotImplementedError
 
             # Only update weights after accumulating enough gradients
             if (i + 1) % self.config['training']['gradient_accumulation_steps'] == 0:
@@ -435,7 +435,7 @@ class ASRTrainer(BaseTrainer):
                 # TODO: Generate sequences
                 if recognition_config['beam_width'] > 1:
                     # TODO: If you have implemented beam search, generate sequences using beam search
-                    seqs, scores = generator.beam_search(
+                    seqs, scores = generator.generate_beam(
                         prompts,
                         beam_width=recognition_config['beam_width'],
                         temperature=recognition_config['temperature'],
@@ -447,7 +447,7 @@ class ASRTrainer(BaseTrainer):
                     scores = scores[:, 0]
                 else:
                     # TODO: Generate sequences using greedy search
-                    seqs, scores = generator.greedy_search(
+                    seqs, scores = generator.generate_greedy(
                         prompts,
                         temperature=recognition_config['temperature'],
                         repeat_penalty=recognition_config["repeat_penalty"],
