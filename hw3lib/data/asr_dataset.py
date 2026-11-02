@@ -212,8 +212,13 @@ class ASRDataset(Dataset):
                 self.text_max_len = max(self.text_max_len, len(tokenized)+1)
                 
                 # TODO: Create shifted and golden versions by adding sos and eos tokens   
-                self.transcripts_shifted.append([self.tokenizer.sos_token] + tokenized)
-                self.transcripts_golden.append(tokenized + [self.tokenizer.eos_token])
+                self.transcripts_shifted.append(
+                    [self.sos_token] + tokenized
+                )
+
+                self.transcripts_golden.append(
+                    tokenized + [self.eos_token]
+                )
 
 
         # Calculate average characters per token
