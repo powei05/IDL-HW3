@@ -69,7 +69,7 @@ class PositionalEncoding(nn.Module):
         # Step 1: Get sequence length from input tensor
         seq_len = x.size(1)
         # Step 2: Verify sequence length doesn't exceed maximum length, raise error if it does
-        if seq_len > self.pe.size(1):
+        if seq_len > self.pe.size(0):
             raise ValueError(f"Sequence length {seq_len} exceeds the maximum length {self.pe.size(1)}")
         # Step 3: Add positional encodings to input
         return x + self.pe[:seq_len].unsqueeze(0)
