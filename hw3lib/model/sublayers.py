@@ -261,7 +261,7 @@ class FeedForwardLayer(nn.Module):
         super().__init__()
         if ffn_type not in ['swiglu', 'gelu']:
             raise ValueError("ffn_type must be 'swiglu' or 'gelu'")
-        if ffn_type == "swig;u":
+        if ffn_type == "swiglu":
             self.ffn = SwiGLU(d_model, d_ff)
         else:
             self.ffn = nn.Sequential(
@@ -270,8 +270,8 @@ class FeedForwardLayer(nn.Module):
                 nn.Dropout(dropout),
                 nn.Linear(d_ff, d_model)
             )
-            self.norm = create_norm(norm_type, d_model)
-            self.dropout = nn.Dropout(dropout)
+        self.norm = create_norm(norm_type, d_model)
+        self.dropout = nn.Dropout(dropout)
             #raise NotImplementedError
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
