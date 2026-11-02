@@ -235,7 +235,10 @@ class EncoderDecoderTransformer(nn.Module):
             if self.training and self.layer_drop_rate > 0 and random.random() < self.layer_drop_rate:
                 continue
  
-            x_enc, attention = NotImplementedError, NotImplementedError
+            x_enc, attention = self.enc_layers[i](
+                x_enc,
+                key_padding_mask=pad_mask_src,
+            )
             running_att[f'layer{i+1}_enc_self'] = attention
 
         # TODO: final normalization and CTC projection
@@ -297,7 +300,13 @@ class EncoderDecoderTransformer(nn.Module):
             if self.training and self.layer_drop_rate > 0 and random.random() < self.layer_drop_rate:
                 continue
  
-            x_dec, self_attn, cross_attn = NotImplementedError, NotImplementedError, NotImplementedError
+            x_dec, self_attn, cross_attn = self.dec_layers[i](
+                x_dec,  
+                encoder_output,
+                self_attn_mask=causal_mask,
+                dec_key_padding_mask=pad_mask_tgt,
+                enc_key_padding_mask=pad_mask_src,
+            )
             running_att[f'layer{i+1}_dec_self'] = self_attn
             running_att[f'layer{i+1}_dec_cross'] = cross_attn
 
