@@ -99,6 +99,10 @@ class MultiHeadAttention(nn.Module):
         k = self.k_proj(key)
         v = self.v_proj(value)
 
+        if self.rope is not None:
+            q, k = self.rope(q, k)
+
+
         # TODO: Reshape for multiple heads
         q = self._split_heads(q)
         k = self._split_heads(k)
