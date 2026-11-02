@@ -185,6 +185,11 @@ class ASRDataset(Dataset):
                     text_path,
                     allow_pickle=True,
                 )
+                if isinstance(transcript, np.ndarray):
+                    transcript = transcript.item()
+                if isinstance(transcript, bytes):
+                    transcript = transcript.decode("utf-8")
+                transcript = str(transcript).strip()
                 # TODO: Track character count (before tokenization)
                 self.total_chars += len(transcript)
 
