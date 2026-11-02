@@ -81,7 +81,7 @@ class CrossAttentionDecoderLayer(nn.Module):
             ffn_type = ffn_type
         )
         # TODO: Initialize the sublayers  
-        raise NotImplementedError # Remove once implemented
+        #raise NotImplementedError # Remove once implemented
 
     def forward(self, x: torch.Tensor, enc_output: torch.Tensor, dec_key_padding_mask: Optional[torch.Tensor] = None, enc_key_padding_mask: Optional[torch.Tensor] = None, attn_mask: Optional[torch.Tensor] = None) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
         '''
@@ -113,5 +113,5 @@ class CrossAttentionDecoderLayer(nn.Module):
         x = self.ffn(x)
 
         return x, self_attn_weights, cross_attn_weights
-        raise NotImplementedError # Remove once implemented
+        #raise NotImplementedError # Remove once implemented
 ## -------------------------------------------------------------------------------------------------    
