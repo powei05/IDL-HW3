@@ -72,7 +72,7 @@ class PositionalEncoding(nn.Module):
         if seq_len > self.pe.size(1):
             raise ValueError(f"Sequence length {seq_len} exceeds the maximum length {self.pe.size(1)}")
         # Step 3: Add positional encodings to input
-        return x + self.pe[:seq_len].unsqueeze(0)
+        return x + self.pe[:, :seq_len]
 
 ## -------------------------------------------------------------------------------------------------
 
