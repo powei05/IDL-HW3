@@ -99,8 +99,7 @@ class MultiHeadAttention(nn.Module):
         k = self.k_proj(key)
         v = self.v_proj(value)
 
-        if self.rope is not None:
-            q, k = self.rope(q, k)
+
 
 
         # TODO: Reshape for multiple heads
@@ -108,6 +107,8 @@ class MultiHeadAttention(nn.Module):
         k = self._split_heads(k)
         v = self._split_heads(v)
 
+        if self.rope is not None:
+            q, k = self.rope(q, k)
         # TODO: Apply QK-Norm and rotary embeddings to the queries and keys, if enabled
         if self.q_norm is not None:
             q = self.q_norm(q)
