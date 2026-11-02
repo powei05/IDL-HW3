@@ -1,5 +1,6 @@
 from typing import Literal, Tuple, Optional
 import os
+from fontTools import subset
 import numpy as np
 from tqdm import tqdm
 import torch
@@ -97,7 +98,8 @@ class ASRDataset(Dataset):
         self.fbank_files = sorted([f for f in os.listdir(self.fbank_dir)])
         
         # TODO: Take subset
-        subset_size      =  config["subset_size"]
+        subset = config.get("subset", 1.0)
+        subset_size = int(len(self.fbank_files) * subset)
         self.fbank_files = self.fbank_files[:subset_size]
         
         # TODO: Get the number of samples in the dataset  
