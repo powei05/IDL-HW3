@@ -66,7 +66,7 @@ class SelfAttentionEncoderLayer(nn.Module):
             norm_type = norm_type
         )
         # TODO: Initialize the sublayers      
-        raise NotImplementedError # Remove once implemented
+        #raise NotImplementedError # Remove once implemented
 
     def forward(self, x: torch.Tensor, key_padding_mask: Optional[torch.Tensor] = None) -> Tuple[torch.Tensor, torch.Tensor]:
         '''
