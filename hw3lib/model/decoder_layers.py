@@ -56,7 +56,7 @@ class CrossAttentionDecoderLayer(nn.Module):
         '''
         super().__init__()
         # TODO: Implement __init__
-        self.self_Attn = SelfAttentionLayer(
+        self.self_attn = SelfAttentionLayer(
             d_model = d_model,
             num_heads = num_heads,
             dropout = dropout,
